@@ -3,6 +3,11 @@ from os import system
 
 txPin = 0 #wiringPi pin
 
+pubnub = Pubnub(
+    publish_key = "YOU-PUB-KEY",
+    subscribe_key = "YOUR-SUB-KEY"
+)
+
 codes = {
     'switch1': {
 	'on': 4216115,
@@ -31,10 +36,6 @@ codes = {
     },
 }
 
-pubnub = Pubnub(
-    publish_key = "pub-c-04b68cf3-7cba-475f-ba4e-5928f2135d40",
-    subscribe_key = "sub-c-1545905a-44b5-11e7-b730-0619f8945a4f"
-)
 
 def sendCode(code, l = 187, txPin = 0):
     system("/var/www/rfoutlet/codesend %s -l %s -p %s" % (code, l, txPin))
