@@ -46,9 +46,9 @@ def sendSwitches(switches, switchTo):
             print(switch)
             code = codes[switch]
             if switchTo == "on":
-                sendCode(code[0])
+                sendCode(code['on'], code['len'], txPin)
             elif switchTo == "off":
-                sendCode(code[1])
+                sendCode(code['off'], code['len'], txPin)
             else:
                 pass
 
