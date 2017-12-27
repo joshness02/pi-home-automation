@@ -63,4 +63,4 @@ def callback(msg, chan):
     sendSwitches(switchNames, switchTo)
 
 print("Ready")
-pubnub.subscribe(channels = ["pubnub_aiy"], callback=callback)
+pubnub.subscribe(channels = ["channel1"], callback=callback)
