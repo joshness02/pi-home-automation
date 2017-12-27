@@ -3,18 +3,39 @@ from os import system
 
 txPin = 0 #wiringPi pin
 
+pubnub = Pubnub(
+    publish_key = "YOU-PUB-KEY",
+    subscribe_key = "YOUR-SUB-KEY"
+)
+
 codes = {
-    'switch1': [4216115, 4216124],
-    'switch2': [4216259, 4216268],
-    'switch3': [4216579, 4216588],
-    'switch4' :[4218115, 4218124],
-    'switch5': [4224259, 4224268],
+    'switch1': {
+	'on': 4216115,
+	'off': 4216124,
+	'len': 187,
+    },
+    'switch2': {
+	'on': 4216259, 
+	'off': 4216268,
+	'len': 187,
+    },
+    'switch3': {
+	'on': 4216579, 
+	'off': 4216588,
+	'len': 187,
+    },
+    'switch4' :{
+	'on': 4218115, 
+	'off': 4218124,
+	'len': 187,
+    },
+    'switch5': {
+	'on': 4224259, 
+	'off': 4224268,
+	'len': 187,
+    },
 }
 
-pubnub = Pubnub(
-    publish_key = "PUB-KEY",
-    subscribe_key = "SUB-KEY"
-)
 
 def sendCode(code, l = 187, txPin = 0):
     system("/var/www/rfoutlet/codesend %s -l %s -p %s" % (code, l, txPin))
@@ -25,9 +46,9 @@ def sendSwitches(switches, switchTo):
             print(switch)
             code = codes[switch]
             if switchTo == "on":
-                sendCode(code[0])
+                sendCode(code['on'], code['len'], txPin)
             elif switchTo == "off":
-                sendCode(code[1])
+                sendCode(code['off'], code['len'], txPin)
             else:
                 pass
 
@@ -42,4 +63,4 @@ def callback(msg, chan):
     sendSwitches(switchNames, switchTo)
 
 print("Ready")
-pubnub.subscribe(channels = ["channel"], callback=callback)
+pubnub.subscribe(channels = ["pubnub_aiy"], callback=callback)
