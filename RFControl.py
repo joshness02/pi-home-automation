@@ -9,10 +9,10 @@ pubnub = Pubnub(
 )
 
 codes = {
-    'switch1': {
-	'on': 4216115,
-	'off': 4216124,
-	'len': 187,
+    'switch1': { #the name of the switch
+	'on': 4216115, #the code to turn the switch on
+	'off': 4216124, #the code to turn the switch off
+	'len': 187, #the length of the codes
     },
     'switch2': {
 	'on': 4216259, 
